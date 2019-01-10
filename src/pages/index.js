@@ -33,7 +33,7 @@ function IndexPage({ data, location }) {
   const info = propPathOr(null, ['info', 'html'], pageData)
   const body = propPathOr(null, ['body'], pageData)
 
-  fetch('/.netlify/functions/hello').then(console.log) // eslint-disable-line
+  fetch('/.netlify/functions/send?name=Foo&email=bar&msg=Baz').then(console.log) // eslint-disable-line
 
   return (
     <Fragment>

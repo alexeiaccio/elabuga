@@ -9,6 +9,7 @@
   "scripts": {
     "lint": "eslint --fix src/**/*.js && prettier --write src/**/*.{js,json,md}",
     "develop": "gatsby develop",
+    "lambda": "node_modules/.bin/netlify-lambda serve src/functions",
     "build:dir": "mkdir -p public/icons/",
     "build:favicons": "node scripts/favicons",
     "build:gatsby": "gatsby build",
@@ -58,6 +59,7 @@
     "gatsby-plugin-webpack-size": "0.0.3",
     "gatsby-source-prismic": "^2.1.0",
     "gatsby-transformer-sharp": "^2.1.9",
+    "googleapis": "^27.0.0",
     "isomorphic-fetch": "^2.2.1",
     "netlify-lambda": "^1.1.1",
     "node-uuid": "^1.4.8",
