@@ -32,8 +32,7 @@ function IndexPage({ data, location }) {
   const info = propPathOr(null, ['info', 'html'], pageData)
   const body = propPathOr(null, ['body'], pageData)
 
-  if (window !== undefined)
-    window.fetch('/.netlify/functions/hello').then(console.log) // eslint-disable-line
+  fetch('/.netlify/functions/hello').then(console.log) // eslint-disable-line
 
   return (
     <Fragment>
