@@ -2,10 +2,12 @@ const writeSheet = require('./googleSheet')
 
 exports.handler = async event => {
   const newValues = [
-    new Date().toISOString(),
-    event.queryStringParameters.name,
-    event.queryStringParameters.email,
-    event.queryStringParameters.msg,
+    [
+      new Date().toISOString(),
+      event.queryStringParameters.name,
+      event.queryStringParameters.email,
+      event.queryStringParameters.msg,
+    ],
   ]
 
   const response = {
