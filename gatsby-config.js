@@ -2,6 +2,7 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 const path = require('path')
+const { htmlSerializer, linkResolver } = require('./src/utils/prismic')
 
 // SEO configuration
 const siteTitle = 'Elabuga'
@@ -47,6 +48,8 @@ module.exports = {
       options: {
         repositoryName: 'elabuga',
         accessToken: process.env.PRICMIC_TOKEN,
+        linkResolver,
+        htmlSerializer,
       },
     },
     // {
