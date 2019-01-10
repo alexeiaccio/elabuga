@@ -4,6 +4,7 @@ import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import propPathOr from 'crocks/helpers/propPathOr'
+import 'isomorphic-fetch'
 
 import Img from '../components/img'
 import Seo from '../components/seo'

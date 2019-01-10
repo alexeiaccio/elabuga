@@ -58,6 +58,7 @@
     "gatsby-plugin-webpack-size": "0.0.3",
     "gatsby-source-prismic": "^2.1.0",
     "gatsby-transformer-sharp": "^2.1.9",
+    "isomorphic-fetch": "^2.2.1",
     "netlify-lambda": "^1.1.1",
     "node-uuid": "^1.4.8",
     "prismic-dom": "^2.1.0",
