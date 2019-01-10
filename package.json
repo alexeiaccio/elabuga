@@ -17,7 +17,7 @@
     "prebuild": "rimraf tailwind.custom.css && postcss tailwind.css -o tailwind.custom.css",
     "predevelop": "rimraf tailwind.custom.css && postcss tailwind.css -o tailwind.custom.css",
     "serve": "gatsby serve",
-    "clean": "rimraf .cache public"
+    "clean": "rimraf .cache public functions"
   },
   "husky": {
     "hooks": {
@@ -43,7 +43,7 @@
     "emotion": "^10.0.5",
     "emotion-server": "^10.0.5",
     "favicons": "^5.3.0",
-    "gatsby": "^2.0.67",
+    "gatsby": "^2.0.91",
     "gatsby-image": "^2.0.25",
     "gatsby-plugin-emotion": "^3.0.1",
     "gatsby-plugin-google-analytics": "^2.0.6",
