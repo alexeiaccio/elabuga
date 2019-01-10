@@ -4,8 +4,8 @@ require('dotenv').config({
 const path = require('path')
 
 // SEO configuration
-const siteTitle = 'Boiler'
-const siteUrl = 'https://freehome.art'
+const siteTitle = 'Elabuga'
+const siteUrl = 'https://www.elabuga.ru'
 const siteDescription = 'Boiler'
 const siteKeywords = 'Gatsby, web'
 const siteThemeColor = '#009688'
@@ -16,7 +16,7 @@ const fbAppId = 'your-fb-app-id'
 // const gaId = 'your-ga-id'
 
 // Used internally
-const utilsTitleShort = 'Boilers'
+const utilsTitleShort = 'Elabuga'
 const utilsIcon = 'static/images/icon.png'
 const utilsBackgroundColor = '#009688'
 
@@ -45,7 +45,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-prismic',
       options: {
-        repositoryName: 'freehome',
+        repositoryName: 'elabuga',
         accessToken: process.env.PRICMIC_TOKEN,
       },
     },
