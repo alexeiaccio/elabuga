@@ -9,7 +9,6 @@
   "scripts": {
     "lint": "eslint --fix src/**/*.js && prettier --write src/**/*.{js,json,md}",
     "develop": "gatsby develop",
-    "lambda": "node_modules/.bin/netlify-lambda serve src/functions",
     "build:dir": "mkdir -p public/icons/",
     "build:favicons": "node scripts/favicons",
     "build:gatsby": "gatsby build",
@@ -17,7 +16,7 @@
     "prebuild": "rimraf tailwind.custom.css && postcss tailwind.css -o tailwind.custom.css",
     "predevelop": "rimraf tailwind.custom.css && postcss tailwind.css -o tailwind.custom.css",
     "serve": "gatsby serve",
-    "clean": "rimraf .cache public functions"
+    "clean": "rimraf .cache public"
   },
   "husky": {
     "hooks": {
@@ -59,9 +58,6 @@
     "gatsby-plugin-webpack-size": "0.0.3",
     "gatsby-source-prismic": "^2.1.0",
     "gatsby-transformer-sharp": "^2.1.9",
-    "googleapis": "^27.0.0",
-    "isomorphic-fetch": "^2.2.1",
-    "netlify-lambda": "^1.1.1",
     "node-uuid": "^1.4.8",
     "prismic-dom": "^2.1.0",
     "prop-types": "^15.6.2",
@@ -70,7 +66,8 @@
     "react-helmet": "^5.2.0",
     "react-pose": "^4.0.4",
     "tailwindcss": "^0.7.3",
-    "typograf": "^6.7.4"
+    "typograf": "^6.7.4",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

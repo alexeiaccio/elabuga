@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import propPathOr from 'crocks/helpers/propPathOr'
-import 'isomorphic-fetch'
+import 'whatwg-fetch'
 
 import Img from '../components/img'
 import Seo from '../components/seo'
@@ -17,7 +17,12 @@ const H1 = styled.div`
 class IndexPage extends Component {
   componentDidMount() {
     // eslint-disable-next-line
-    fetch('/.netlify/functions/send?name=Foo&email=bar&msg=Baz')
+    const name = 'Poop'
+    const contact = 'poop@po.op'
+    const msg = 'Lorem ipsum'
+    fetch(
+      `https://v66qfxaz26.execute-api.us-east-1.amazonaws.com/dev/send?name=${name}&contact=${contact}&msg=${msg}`
+    )
       .then(console.log)
       .catch(console.error)
   }
