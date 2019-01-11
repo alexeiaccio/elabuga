@@ -52,6 +52,12 @@ module.exports = {
         htmlSerializer,
       },
     },
+    {
+      resolve: 'gatsby-source-published-google-sheets',
+      options: {
+        sheetID: process.env.SHEET_ID,
+      },
+    },
     // {
     //   resolve: 'gatsby-plugin-google-analytics',
     //   options: {

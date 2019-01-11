@@ -22,8 +22,8 @@ class IndexPage extends Component {
     fetch(
       `https://v66qfxaz26.execute-api.us-east-1.amazonaws.com/dev/send?name=${name}&contact=${contact}&msg=${msg}`
     )
-      .then(console.log)
-      .catch(console.error)
+      .then(console.log) // eslint-disable-line
+      .catch(console.error) // eslint-disable-line
   }
 
   render() {
@@ -45,6 +45,8 @@ class IndexPage extends Component {
     const text = propPathOr(null, ['text', 'html'], pageData)
     const info = propPathOr(null, ['info', 'html'], pageData)
     const body = propPathOr(null, ['body'], pageData)
+
+    const histories = propPathOr(null, ['histories', 'edges'], data)
 
     return (
       <Fragment>
@@ -98,6 +100,20 @@ class IndexPage extends Component {
           })}
         </div>
         <RichContent content={info} />
+        {histories.map(({ node }) => {
+          const id = propPathOr(null, ['id'], node)
+          const historyDate = propPathOr(null, ['date'], node)
+          const name = propPathOr(null, ['name'], node)
+          const history = propPathOr(null, ['history'], node)
+
+          return (
+            <div key={id}>
+              <p>{historyDate}</p>
+              <p>{name}</p>
+              <p>{history}</p>
+            </div>
+          )
+        })}
       </Fragment>
     )
   }
@@ -106,6 +122,7 @@ class IndexPage extends Component {
 IndexPage.propTypes = {
   data: PropTypes.shape({
     homepage: PropTypes.object.isRequired,
+    histories: PropTypes.object.isRequired,
   }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
@@ -171,6 +188,16 @@ export const PageQuery = graphql`
               html
             }
           }
+        }
+      }
+    }
+    histories: allGoogleSheetRow(filter: { published: { eq: "1" } }) {
+      edges {
+        node {
+          id
+          date
+          name
+          history
         }
       }
     }
