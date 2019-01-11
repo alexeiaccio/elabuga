@@ -46,7 +46,7 @@ class IndexPage extends Component {
     const info = propPathOr(null, ['info', 'html'], pageData)
     const body = propPathOr(null, ['body'], pageData)
 
-    const histories = propPathOr(null, ['histories', 'edges'], data)
+    const histories = propPathOr([], ['histories', 'edges'], data)
 
     return (
       <Fragment>
