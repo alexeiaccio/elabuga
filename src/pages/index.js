@@ -191,7 +191,7 @@ export const PageQuery = graphql`
         }
       }
     }
-    histories: allGoogleSheetRow(filter: { published: { eq: "1" } }) {
+    histories: allGoogleSheetRow(filter: { published: { eq: "yes" } }) {
       edges {
         node {
           id
