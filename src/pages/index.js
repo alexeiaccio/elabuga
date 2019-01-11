@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import propPathOr from 'crocks/helpers/propPathOr'
-import 'whatwg-fetch'
+import 'isomorphic-fetch'
 
 import Img from '../components/img'
 import Seo from '../components/seo'
@@ -16,7 +16,6 @@ const H1 = styled.div`
 
 class IndexPage extends Component {
   componentDidMount() {
-    // eslint-disable-next-line
     const name = 'Poop'
     const contact = 'poop@po.op'
     const msg = 'Lorem ipsum'

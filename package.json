@@ -58,6 +58,7 @@
     "gatsby-plugin-webpack-size": "0.0.3",
     "gatsby-source-prismic": "^2.1.0",
     "gatsby-transformer-sharp": "^2.1.9",
+    "isomorphic-fetch": "^2.2.1",
     "node-uuid": "^1.4.8",
     "prismic-dom": "^2.1.0",
     "prop-types": "^15.6.2",
@@ -66,8 +67,7 @@
     "react-helmet": "^5.2.0",
     "react-pose": "^4.0.4",
     "tailwindcss": "^0.7.3",
-    "typograf": "^6.7.4",
-    "whatwg-fetch": "^3.0.0"
+    "typograf": "^6.7.4"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
