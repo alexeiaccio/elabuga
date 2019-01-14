@@ -267,7 +267,7 @@ module.exports = {
     body: 'calc(18px + 6 * ((100vw - 320px) / 1280))',
     description: 'calc(10px + 4 * ((100vw - 320px) / 1280))',
     heading0: 'calc(104px + 72 * ((100vw - 320px) / 1280))',
-    heading1: 'calc(36px + 108 * ((100vw - 320px) / 1280))',
+    heading1: 'calc(36px + 36 * ((100vw - 320px) / 1280))',
     heading2: 'calc(32px + 36 * ((100vw - 320px) / 1280))',
     heading3: 'calc(34px + 18 * ((100vw - 320px) / 1280))',
     heading4: 'calc(30px + 18 * ((100vw - 320px) / 1280))',

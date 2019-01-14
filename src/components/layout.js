@@ -15,6 +15,9 @@ function Layout({ children, image }) {
           html {
             ${tw(['font-opensans'])};
           }
+          body {
+            ${tw(['m-0', 'p-0'])}
+          }
           h1,
           h2,
           h3,
@@ -27,6 +30,7 @@ function Layout({ children, image }) {
         `}
       />
       <Img
+        backgroundColor="#abacad"
         src={image}
         style={{
           position: 'fixed',
@@ -34,12 +38,25 @@ function Layout({ children, image }) {
           bottom: 0,
           left: 0,
           right: 0,
-          backgoundColor: '#abacad',
         }}
       />
       <div
         css={css`
-          ${tw(['bg-white', 'mx-auto', 'max-w-md', 'p-q24', 'relative'])}
+          ${tw(['bg-black', 'fixed', 'opacity-25', 'pin'])};
+        `}
+      />
+      <div
+        css={css`
+          ${tw([
+            'bg-white',
+            'max-w-md',
+            'mx-auto',
+            'my-q48',
+            'p-q24',
+            'relative',
+            'shadow-text',
+            'md:my-q72',
+          ])}
         `}
       >
         {children}

@@ -2,19 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
-import styled from '@emotion/styled'
 import propPathOr from 'crocks/helpers/propPathOr'
-import 'isomorphic-fetch'
 
 import Form from '../components/form'
 import Img from '../components/img'
 import Layout from '../components/layout'
+import Query from '../components/query'
 import Seo from '../components/seo'
 import RichContent from '../components/rich-content'
-
-const H1 = styled.div`
-  color: red;
-`
+import { Heading1 } from '../components/typography'
+import { RichText } from '../components/rich-text'
 
 function IndexPage({ data, location }) {
   const pageData = propPathOr(null, ['homepage', 'data'], data)
@@ -26,7 +23,7 @@ function IndexPage({ data, location }) {
     pageData
   )
   const pathname = propPathOr('/', ['location', 'pathname'], location)
-  const title = propPathOr(null, ['title', 'text'], pageData)
+  const title = propPathOr(null, ['title', 'html'], pageData)
   const description = propPathOr(null, ['description'], pageData)
   const date = propPathOr(null, ['date'], pageData)
   const fromNow = propPathOr(null, ['fromNow'], pageData)
@@ -46,18 +43,26 @@ function IndexPage({ data, location }) {
         pageImage={pageImage}
         pathname={pathname}
       />
-      <H1
+      <RichContent
+        content={title}
         css={css`
-          color: black;
+          h1 {
+            ${Heading1};
+          }
+        `}
+      />
+      <div
+        css={css`
+          ${tw(['font-semibold', 'mt-q12', 'text-lg'])}
         `}
       >
-        {title}
-      </H1>
-      <div>{description}</div>
-      <div>
-        Cбора историй завершиться <b>{fromNow}</b> – {date}
+        {description}
       </div>
-      <RichContent content={text} />
+      <Query body={body} />
+      <div>
+        Cбор историй завершится <b>{fromNow}</b> – {date}
+      </div>
+      <RichContent css={RichText} content={text} />
       <div>
         {body.map(({ id, primary }) => {
           const historytitle = propPathOr(
@@ -120,6 +125,7 @@ export const PageQuery = graphql`
     homepage: prismicHomepage {
       data {
         title {
+          html
           text
         }
         description

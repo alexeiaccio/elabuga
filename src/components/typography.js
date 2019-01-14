@@ -9,12 +9,12 @@ export const BodySemibold = css`
 `
 
 export const ButtonSmallText = css`
-  ${tw(['font-source', 'font-semibold', 'text-xs', 'tracking-button'])};
+  ${tw(['font-source', 'font-semibold', 'text-sm', 'tracking-button'])};
   font-variant-caps: all-small-caps;
 `
 
 export const ButtonText = css`
-  ${tw(['font-source', 'font-semibold', 'text-sm', 'tracking-button'])};
+  ${tw(['font-source', 'font-semibold', 'text-lg', 'tracking-button'])};
   font-variant-caps: all-small-caps;
 `
 
@@ -28,7 +28,7 @@ export const DescriptionSemibold = css`
 `
 
 export const Heading = css`
-  ${tw(['font-bold', 'leading-heading', 'm-0', 'tracking-normal'])};
+  ${tw(['font-bold', 'leading-tight', 'm-0', 'tracking-normal'])};
 `
 
 export const Heading0 = css`

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import Button from './button'
+
 const DEFAULT_STATE = {
   contact: '',
   msg: '',
@@ -68,7 +70,9 @@ class Form extends Component {
           required
         />
         <p>Осталось: {left} знаков.</p>
-        <button type="submit">Отправить</button>
+        <Button size="sm" type="submit">
+          Отправить
+        </Button>
       </form>
     )
   }
