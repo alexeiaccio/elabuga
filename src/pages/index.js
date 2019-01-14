@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
@@ -8,6 +8,7 @@ import 'isomorphic-fetch'
 
 import Form from '../components/form'
 import Img from '../components/img'
+import Layout from '../components/layout'
 import Seo from '../components/seo'
 import RichContent from '../components/rich-content'
 
@@ -15,7 +16,7 @@ const H1 = styled.div`
   color: red;
 `
 
-const IndexPage = ({ data, location }) => {
+function IndexPage({ data, location }) {
   const pageData = propPathOr(null, ['homepage', 'data'], data)
   const pageTitle = propPathOr(null, ['title', 'text'], pageData)
   const pageKeywords = propPathOr(null, ['seokeywords'], pageData)
@@ -37,7 +38,7 @@ const IndexPage = ({ data, location }) => {
   const histories = propPathOr([], ['histories', 'edges'], data)
 
   return (
-    <Fragment>
+    <Layout image={image}>
       <Seo
         pageTitle={pageTitle}
         pageDescription={description}
@@ -56,7 +57,6 @@ const IndexPage = ({ data, location }) => {
       <div>
         Cбора историй завершиться <b>{fromNow}</b> – {date}
       </div>
-      <Img src={image} />
       <RichContent content={text} />
       <div>
         {body.map(({ id, primary }) => {
@@ -99,7 +99,7 @@ const IndexPage = ({ data, location }) => {
           </div>
         )
       })}
-    </Fragment>
+    </Layout>
   )
 }
 
@@ -172,10 +172,28 @@ export const PageQuery = graphql`
               html
             }
           }
+          items {
+            sampletitle {
+              text
+            }
+            sampleimage {
+              url
+              localFile {
+                childImageSharp {
+                  fluid(maxWidth: 1920) {
+                    ...GatsbyImageSharpFluid_noBase64
+                  }
+                }
+              }
+            }
+            sampletext {
+              html
+            }
+          }
         }
       }
     }
-    histories: allGoogleSheetRow(filter: { published: { eq: "yes" } }) {
+    histories: allGoogleSheetRow {
       edges {
         node {
           id
@@ -183,6 +201,7 @@ export const PageQuery = graphql`
           date
           name
           history
+          redacted
         }
       }
     }

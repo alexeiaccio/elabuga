@@ -28,38 +28,37 @@ export const DescriptionSemibold = css`
 `
 
 export const Heading = css`
-  ${tw(['font-bold', 'leading-heading', 'm-0', 'tracking-tight'])};
+  ${tw(['font-bold', 'leading-heading', 'm-0', 'tracking-normal'])};
 `
 
 export const Heading0 = css`
   ${Heading};
-  ${tw(['text-heading0', 'font-bold'])};
-  line-height: 0.7125;
+  ${tw(['text-heading0'])};
 `
 
 export const Heading1 = css`
   ${Heading};
-  ${tw(['mb-q24', 'text-heading2'])};
+  ${tw(['text-heading1'])};
 `
 
 export const Heading2 = css`
   ${Heading};
-  ${tw(['text-heading3'])};
+  ${tw(['text-heading2'])};
 `
 
 export const Heading3 = css`
   ${Heading};
-  ${tw(['text-heading4'])};
+  ${tw(['text-heading3'])};
 `
 
 export const Heading4 = css`
   ${Heading};
-  ${tw(['text-heading5'])};
+  ${tw(['text-heading4'])};
 `
 
 export const Heading5 = css`
   ${Heading};
-  ${tw(['text-heading6'])};
+  ${tw(['text-heading5'])};
 `
 
 export const Heading6 = css`
@@ -68,7 +67,7 @@ export const Heading6 = css`
 `
 
 export const LeadText = css`
-  ${tw(['leading-tight', 'text-heading5', 'font-medium'])};
+  ${tw(['leading-normal', 'text-heading5', 'font-medium'])};
 `
 
 export const List = css`
@@ -76,7 +75,7 @@ export const List = css`
     'font-source',
     'font-medium',
     'leading-loose',
-    'text-xs',
+    'text-list',
     'tracking-normal',
     'list-reset',
   ])};

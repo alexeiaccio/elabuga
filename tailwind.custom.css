@@ -3194,8 +3194,12 @@ table {
   font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 }
 
-.font-montserrat {
-  font-family: Montserrat, sans-serif;
+.font-opensans {
+  font-family: Open Sans, sans-serif;
+}
+
+.font-plex {
+  font-family: IBM Plex Sans, sans-serif;
 }
 
 .font-hairline {
@@ -10450,8 +10454,12 @@ table {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 
-  .sm\:font-montserrat {
-    font-family: Montserrat, sans-serif;
+  .sm\:font-opensans {
+    font-family: Open Sans, sans-serif;
+  }
+
+  .sm\:font-plex {
+    font-family: IBM Plex Sans, sans-serif;
   }
 
   .sm\:font-hairline {
@@ -17687,8 +17695,12 @@ table {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 
-  .md\:font-montserrat {
-    font-family: Montserrat, sans-serif;
+  .md\:font-opensans {
+    font-family: Open Sans, sans-serif;
+  }
+
+  .md\:font-plex {
+    font-family: IBM Plex Sans, sans-serif;
   }
 
   .md\:font-hairline {
@@ -24924,8 +24936,12 @@ table {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 
-  .lg\:font-montserrat {
-    font-family: Montserrat, sans-serif;
+  .lg\:font-opensans {
+    font-family: Open Sans, sans-serif;
+  }
+
+  .lg\:font-plex {
+    font-family: IBM Plex Sans, sans-serif;
   }
 
   .lg\:font-hairline {
@@ -32161,8 +32177,12 @@ table {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 
-  .xl\:font-montserrat {
-    font-family: Montserrat, sans-serif;
+  .xl\:font-opensans {
+    font-family: Open Sans, sans-serif;
+  }
+
+  .xl\:font-plex {
+    font-family: IBM Plex Sans, sans-serif;
   }
 
   .xl\:font-hairline {
@@ -39398,8 +39418,12 @@ table {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 
-  .screen\:font-montserrat {
-    font-family: Montserrat, sans-serif;
+  .screen\:font-opensans {
+    font-family: Open Sans, sans-serif;
+  }
+
+  .screen\:font-plex {
+    font-family: IBM Plex Sans, sans-serif;
   }
 
   .screen\:font-hairline {
@@ -46635,8 +46659,12 @@ table {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 
-  .desktop\:font-montserrat {
-    font-family: Montserrat, sans-serif;
+  .desktop\:font-opensans {
+    font-family: Open Sans, sans-serif;
+  }
+
+  .desktop\:font-plex {
+    font-family: IBM Plex Sans, sans-serif;
   }
 
   .desktop\:font-hairline {
