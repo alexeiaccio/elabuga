@@ -21,7 +21,7 @@ export default styled.button`
   ${buttonStyles};
   background-color: #f0c41b;
   transition: all 200ms ease-in-out;
-  &:disabled {
+  &[data-disabled='true'] {
     ${tw(['bg-grey-lighter'])};
   }
 `

@@ -94,6 +94,15 @@ export const Label = styled.label`
 `
 
 class Query extends Component {
+  static propTypes = {
+    body: PropTypes.arrayOf(PropTypes.any).isRequired,
+    success: PropTypes.string,
+  }
+
+  static defaultProps = {
+    success: null,
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -111,9 +120,16 @@ class Query extends Component {
     }))
   }
 
+  handleRoot = value => {
+    this.setState({ stage: value })
+    if (window !== undefined) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
   render() {
     const { isOpen, stage, tag } = this.state
-    const { body } = this.props
+    const { body, success } = this.props
 
     return (
       <>
@@ -207,7 +223,7 @@ class Query extends Component {
                           css={css`
                             ${tw(['mt-q36'])};
                           `}
-                          onClick={() => this.setState({ stage: 'form' })}
+                          onClick={() => this.handleRoot('form')}
                           size="lg"
                           type="button"
                           disabled={!tag}
@@ -218,17 +234,23 @@ class Query extends Component {
                     ]
                   : [
                       <Tab key="form">
-                        <Form tag={tag} />
-                        <Button
+                        <div
                           css={css`
-                            ${tw(['bg-grey', 'mt-q36'])};
+                            ${tw(['mt-q36'])};
                           `}
-                          onClick={() => this.setState({ stage: 'type' })}
-                          size="lg"
-                          type="button"
                         >
-                          Назад
-                        </Button>
+                          <Form tag={tag} success={success} />
+                          <Button
+                            css={css`
+                              ${tw(['bg-grey', 'mt-q36'])};
+                            `}
+                            onClick={() => this.handleRoot('type')}
+                            size="lg"
+                            type="button"
+                          >
+                            Назад
+                          </Button>
+                        </div>
                       </Tab>,
                     ]}
               </PoseGroup>
@@ -238,10 +260,6 @@ class Query extends Component {
       </>
     )
   }
-}
-
-Query.propTypes = {
-  body: PropTypes.arrayOf(PropTypes.any).isRequired,
 }
 
 export default Query

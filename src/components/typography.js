@@ -28,7 +28,7 @@ export const DescriptionSemibold = css`
 `
 
 export const Heading = css`
-  ${tw(['font-bold', 'leading-tight', 'm-0', 'tracking-normal'])};
+  ${tw(['font-bold', 'leading-none', 'm-0', 'tracking-normal'])};
 `
 
 export const Heading0 = css`

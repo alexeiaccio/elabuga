@@ -45,9 +45,8 @@ class IndexPage extends Component {
     const image = propPathOr(null, ['image'], pageData)
     const text = propPathOr(null, ['text', 'html'], pageData)
     const info = propPathOr(null, ['info', 'html'], pageData)
+    const success = propPathOr(null, ['success', 'html'], pageData)
     const body = propPathOr(null, ['body'], pageData)
-
-    const histories = propPathOr([], ['histories', 'edges'], data)
 
     return (
       <Layout image={image}>
@@ -73,7 +72,7 @@ class IndexPage extends Component {
         >
           {description}
         </div>
-        <Query body={body} />
+        <Query body={body} success={success} />
         <div>
           Cбор историй завершится <b>{fromNow}</b> – {date}
         </div>
@@ -134,23 +133,9 @@ class IndexPage extends Component {
           >
             2. Заполните форму
           </h2>
-          <Form tag={tag} />
-          <RichContent content={info} />
+          <Form tag={tag} success={success} />
         </Content>
-        {histories.map(({ node }) => {
-          const id = propPathOr(null, ['id'], node)
-          const historyDate = propPathOr(null, ['date'], node)
-          const name = propPathOr(null, ['name'], node)
-          const history = propPathOr(null, ['history'], node)
-
-          return (
-            <div key={id}>
-              <p>{historyDate}</p>
-              <p>{name}</p>
-              <p>{history}</p>
-            </div>
-          )
-        })}
+        <RichContent css={RichText} content={info} />
       </Layout>
     )
   }
@@ -159,7 +144,6 @@ class IndexPage extends Component {
 IndexPage.propTypes = {
   data: PropTypes.shape({
     homepage: PropTypes.object.isRequired,
-    histories: PropTypes.object.isRequired,
   }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
@@ -205,6 +189,9 @@ export const PageQuery = graphql`
         info {
           html
         }
+        success {
+          html
+        }
         body {
           id
           primary {
@@ -244,18 +231,6 @@ export const PageQuery = graphql`
               html
             }
           }
-        }
-      }
-    }
-    histories: allGoogleSheetRow {
-      edges {
-        node {
-          id
-          tag
-          date
-          name
-          history
-          redacted
         }
       }
     }
