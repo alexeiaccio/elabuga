@@ -7,7 +7,7 @@ const DEFAULT_STATE = {
   contact: '',
   msg: '',
   name: '',
-  left: 1200,
+  left: 700,
 }
 
 class Form extends Component {
@@ -64,13 +64,13 @@ class Form extends Component {
         <textarea
           id="msg"
           onChange={this.handleUpdate}
-          maxLength="1280"
-          placeholder="История длиной до 1200 символов"
+          maxLength="780"
+          placeholder="История длиной до 700 знаков"
           value={msg}
           required
         />
         <p>Осталось: {left} знаков.</p>
-        <Button size="sm" type="submit">
+        <Button size="lg" type="submit" disabled={false}>
           Отправить
         </Button>
       </form>
@@ -79,7 +79,11 @@ class Form extends Component {
 }
 
 Form.propTypes = {
-  tag: PropTypes.string.isRequired,
+  tag: PropTypes.string,
+}
+
+Form.defaultProps = {
+  tag: '',
 }
 
 export default Form
