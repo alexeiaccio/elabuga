@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-for */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
@@ -11,11 +9,19 @@ import RichContent from './rich-content'
 import { RichText } from './rich-text'
 
 const wrapperStyles = css`
-  ${tw(['relative'])};
+  ${tw(['block', 'relative'])};
 `
 
 const labelStyles = css`
-  ${tw(['absolute', 'bg-white', 'ml-q16', 'px-q8', 'pin-l', 'pin-t'])};
+  ${tw([
+    'absolute',
+    'bg-white',
+    'inline-block',
+    'ml-q16',
+    'px-q8',
+    'pin-l',
+    'pin-t',
+  ])};
   margin-top: -0.75rem;
 `
 
@@ -38,13 +44,15 @@ const captionStyles = css`
   ${tw([
     'absolute',
     'bg-white',
+    'inline-block',
     'mr-q16',
     'px-q8',
     'pin-r',
     'pin-b',
     'text-grey',
+    'whitespace-no-wrap',
   ])};
-  margin-bottom: 1.75rem;
+  margin-bottom: 2rem;
 `
 
 const inputStyles = css`
@@ -147,10 +155,8 @@ class Form extends Component {
               Don’t fill this out: <input id="bot" name="bot-field" />
             </label>
           </p>
-          <div css={wrapperStyles}>
-            <label css={labelStyles} htmlFor="name">
-              Имя
-            </label>
+          <label css={wrapperStyles} htmlFor="name">
+            <span css={labelStyles}>Имя</span>
             <input
               css={inputStyles}
               id="name"
@@ -161,11 +167,9 @@ class Form extends Component {
               value={name}
               required
             />
-          </div>
-          <div css={wrapperStyles}>
-            <label css={labelStyles} htmlFor="contact">
-              Контакты
-            </label>
+          </label>
+          <label css={wrapperStyles} htmlFor="contact">
+            <span css={labelStyles}>Контакты</span>
             <input
               css={inputStyles}
               id="contact"
@@ -175,11 +179,9 @@ class Form extends Component {
               value={contact}
               required
             />
-          </div>
+          </label>
           <div css={wrapperStyles}>
-            <label css={labelStyles} htmlFor="msg">
-              История
-            </label>
+            <span css={labelStyles}>История</span>
             <Textarea
               css={inputStyles}
               id="msg"
@@ -190,7 +192,7 @@ class Form extends Component {
               value={msg}
               required
             />
-            <div css={captionStyles}>Осталось: {left} знаков.</div>
+            <span css={captionStyles}>Осталось: {left} знаков.</span>
           </div>
         </fieldset>
         <Button

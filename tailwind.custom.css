@@ -7215,19 +7215,19 @@ table {
 }
 
 .text-heading1 {
-  font-size: calc(36px + 36 * ((100vw - 320px) / 1280));
+  font-size: calc(36px + 12 * ((100vw - 320px) / 1280));
 }
 
 .text-heading2 {
-  font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
+  font-size: calc(32px + 12 * ((100vw - 320px) / 1280));
 }
 
 .text-heading3 {
-  font-size: calc(34px + 18 * ((100vw - 320px) / 1280));
+  font-size: calc(30px + 12 * ((100vw - 320px) / 1280));
 }
 
 .text-heading4 {
-  font-size: calc(30px + 18 * ((100vw - 320px) / 1280));
+  font-size: calc(28px + 12 * ((100vw - 320px) / 1280));
 }
 
 .text-heading5 {
@@ -7235,7 +7235,7 @@ table {
 }
 
 .text-heading6 {
-  font-size: calc(21px + 3 * ((100vw - 320px) / 1280));
+  font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
 }
 
 .text-list {
@@ -14455,19 +14455,19 @@ table {
   }
 
   .sm\:text-heading1 {
-    font-size: calc(36px + 36 * ((100vw - 320px) / 1280));
+    font-size: calc(36px + 12 * ((100vw - 320px) / 1280));
   }
 
   .sm\:text-heading2 {
-    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
+    font-size: calc(32px + 12 * ((100vw - 320px) / 1280));
   }
 
   .sm\:text-heading3 {
-    font-size: calc(34px + 18 * ((100vw - 320px) / 1280));
+    font-size: calc(30px + 12 * ((100vw - 320px) / 1280));
   }
 
   .sm\:text-heading4 {
-    font-size: calc(30px + 18 * ((100vw - 320px) / 1280));
+    font-size: calc(28px + 12 * ((100vw - 320px) / 1280));
   }
 
   .sm\:text-heading5 {
@@ -14475,7 +14475,7 @@ table {
   }
 
   .sm\:text-heading6 {
-    font-size: calc(21px + 3 * ((100vw - 320px) / 1280));
+    font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
   }
 
   .sm\:text-list {
@@ -21696,19 +21696,19 @@ table {
   }
 
   .md\:text-heading1 {
-    font-size: calc(36px + 36 * ((100vw - 320px) / 1280));
+    font-size: calc(36px + 12 * ((100vw - 320px) / 1280));
   }
 
   .md\:text-heading2 {
-    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
+    font-size: calc(32px + 12 * ((100vw - 320px) / 1280));
   }
 
   .md\:text-heading3 {
-    font-size: calc(34px + 18 * ((100vw - 320px) / 1280));
+    font-size: calc(30px + 12 * ((100vw - 320px) / 1280));
   }
 
   .md\:text-heading4 {
-    font-size: calc(30px + 18 * ((100vw - 320px) / 1280));
+    font-size: calc(28px + 12 * ((100vw - 320px) / 1280));
   }
 
   .md\:text-heading5 {
@@ -21716,7 +21716,7 @@ table {
   }
 
   .md\:text-heading6 {
-    font-size: calc(21px + 3 * ((100vw - 320px) / 1280));
+    font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
   }
 
   .md\:text-list {
@@ -28937,19 +28937,19 @@ table {
   }
 
   .lg\:text-heading1 {
-    font-size: calc(36px + 36 * ((100vw - 320px) / 1280));
+    font-size: calc(36px + 12 * ((100vw - 320px) / 1280));
   }
 
   .lg\:text-heading2 {
-    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
+    font-size: calc(32px + 12 * ((100vw - 320px) / 1280));
   }
 
   .lg\:text-heading3 {
-    font-size: calc(34px + 18 * ((100vw - 320px) / 1280));
+    font-size: calc(30px + 12 * ((100vw - 320px) / 1280));
   }
 
   .lg\:text-heading4 {
-    font-size: calc(30px + 18 * ((100vw - 320px) / 1280));
+    font-size: calc(28px + 12 * ((100vw - 320px) / 1280));
   }
 
   .lg\:text-heading5 {
@@ -28957,7 +28957,7 @@ table {
   }
 
   .lg\:text-heading6 {
-    font-size: calc(21px + 3 * ((100vw - 320px) / 1280));
+    font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
   }
 
   .lg\:text-list {
@@ -36178,19 +36178,19 @@ table {
   }
 
   .xl\:text-heading1 {
-    font-size: calc(36px + 36 * ((100vw - 320px) / 1280));
+    font-size: calc(36px + 12 * ((100vw - 320px) / 1280));
   }
 
   .xl\:text-heading2 {
-    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
+    font-size: calc(32px + 12 * ((100vw - 320px) / 1280));
   }
 
   .xl\:text-heading3 {
-    font-size: calc(34px + 18 * ((100vw - 320px) / 1280));
+    font-size: calc(30px + 12 * ((100vw - 320px) / 1280));
   }
 
   .xl\:text-heading4 {
-    font-size: calc(30px + 18 * ((100vw - 320px) / 1280));
+    font-size: calc(28px + 12 * ((100vw - 320px) / 1280));
   }
 
   .xl\:text-heading5 {
@@ -36198,7 +36198,7 @@ table {
   }
 
   .xl\:text-heading6 {
-    font-size: calc(21px + 3 * ((100vw - 320px) / 1280));
+    font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
   }
 
   .xl\:text-list {
@@ -43419,19 +43419,19 @@ table {
   }
 
   .screen\:text-heading1 {
-    font-size: calc(36px + 36 * ((100vw - 320px) / 1280));
+    font-size: calc(36px + 12 * ((100vw - 320px) / 1280));
   }
 
   .screen\:text-heading2 {
-    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
+    font-size: calc(32px + 12 * ((100vw - 320px) / 1280));
   }
 
   .screen\:text-heading3 {
-    font-size: calc(34px + 18 * ((100vw - 320px) / 1280));
+    font-size: calc(30px + 12 * ((100vw - 320px) / 1280));
   }
 
   .screen\:text-heading4 {
-    font-size: calc(30px + 18 * ((100vw - 320px) / 1280));
+    font-size: calc(28px + 12 * ((100vw - 320px) / 1280));
   }
 
   .screen\:text-heading5 {
@@ -43439,7 +43439,7 @@ table {
   }
 
   .screen\:text-heading6 {
-    font-size: calc(21px + 3 * ((100vw - 320px) / 1280));
+    font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
   }
 
   .screen\:text-list {
@@ -50660,19 +50660,19 @@ table {
   }
 
   .desktop\:text-heading1 {
-    font-size: calc(36px + 36 * ((100vw - 320px) / 1280));
+    font-size: calc(36px + 12 * ((100vw - 320px) / 1280));
   }
 
   .desktop\:text-heading2 {
-    font-size: calc(32px + 36 * ((100vw - 320px) / 1280));
+    font-size: calc(32px + 12 * ((100vw - 320px) / 1280));
   }
 
   .desktop\:text-heading3 {
-    font-size: calc(34px + 18 * ((100vw - 320px) / 1280));
+    font-size: calc(30px + 12 * ((100vw - 320px) / 1280));
   }
 
   .desktop\:text-heading4 {
-    font-size: calc(30px + 18 * ((100vw - 320px) / 1280));
+    font-size: calc(28px + 12 * ((100vw - 320px) / 1280));
   }
 
   .desktop\:text-heading5 {
@@ -50680,7 +50680,7 @@ table {
   }
 
   .desktop\:text-heading6 {
-    font-size: calc(21px + 3 * ((100vw - 320px) / 1280));
+    font-size: calc(18px + 6 * ((100vw - 320px) / 1280));
   }
 
   .desktop\:text-list {
