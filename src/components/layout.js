@@ -47,7 +47,14 @@ function Layout({ children, image }) {
       />
       <div
         css={css`
-          ${tw(['max-w-md', 'mx-auto', 'my-q48', 'relative', 'md:my-q72'])}
+          ${tw([
+            'max-w-md',
+            'mx-auto',
+            'my-q48',
+            'relative',
+            'md:ml-1/6',
+            'md:my-q72',
+          ])}
         `}
       >
         {children}
