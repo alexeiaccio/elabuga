@@ -8,13 +8,13 @@ import uuid from 'node-uuid'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import RichContent from '../components/rich-content'
-import { Heading1 } from '../components/typography'
+import { Heading1, Heading6 } from '../components/typography'
 
 const cardStyles = css`
   ${tw(['bg-white', 'my-q48', 'px-q24', 'py-q36', 'shadow-text'])};
 `
 
-function HistoriesPage({ data, location }) {
+function HistoriesPage({ data, location, pageContext }) {
   const seoData = propPathOr(null, ['seo', 'data'], data)
   const pageTitle = propPathOr(null, ['title', 'text'], seoData)
   const description = propPathOr(null, ['description'], seoData)
@@ -28,6 +28,9 @@ function HistoriesPage({ data, location }) {
   const title = propPathOr(null, ['title', 'html'], seoData)
   const pathname = propPathOr('/', ['location', 'pathname'], location)
   const histories = propPathOr(null, ['histories', 'edges'], data)
+
+  const { total } = pageContext
+  const serialize = x => (x % 100 === 1 ? 'я' : x % 100 < 5 ? 'и' : 'й') // eslint-disable-line no-nested-ternary
 
   return (
     <Layout image={image}>
@@ -54,6 +57,11 @@ function HistoriesPage({ data, location }) {
         >
           {description}
         </div>
+      </div>
+      <div css={cardStyles}>
+        <h2 css={Heading6}>
+          Мы уже собрали {total} истори{serialize(total)}
+        </h2>
       </div>
       {histories.map(({ node }) => {
         const history = propPathOr(null, ['history'], node)
@@ -83,6 +91,7 @@ HistoriesPage.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
+  pageContext: PropTypes.objectOf(PropTypes.any).isRequired,
 }
 
 export default HistoriesPage

@@ -24,8 +24,11 @@ exports.createPages = async ({ actions, graphql }) => {
       path: i === 0 ? `/histories` : `/histories/${i + 1}`,
       component: path.resolve('./src/templates/histories.js'),
       context: {
+        currentPage: i + 1,
         limit: postsPerPage,
+        numPages,
         skip: i * postsPerPage,
+        total: histories.length,
       },
     })
   })
