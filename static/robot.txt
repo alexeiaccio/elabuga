@@ -1,0 +1,7 @@
+User-agent: Yandex
+Allow: /
+sitemap: https://elabuga.orchestra-design.com/sitemap.xml
+
+User-agent: *
+Allow: /
+sitemap: https://elabuga.orchestra-design.com/sitemap.xml
