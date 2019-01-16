@@ -60,7 +60,7 @@ export const Label = styled.label`
     'cursor-pointer',
     'block',
     'font-bold',
-    'mt-q12',
+    'mt-0',
     'mb-q8',
     'pl-q36',
     'relative',
@@ -154,6 +154,7 @@ class Query extends Component {
                   'fixed',
                   'max-w-full',
                   'pin',
+                  'z-10',
                 ])};
               `}
               key="shade"
@@ -171,6 +172,7 @@ class Query extends Component {
                   'm-q24',
                   'p-q24',
                   'shadow-text',
+                  'z-20',
                 ])};
               `}
               key="modal"
@@ -178,6 +180,7 @@ class Query extends Component {
               <h2
                 css={css`
                   ${Heading4};
+                  ${tw(['mb-q24'])};
                 `}
               >
                 {stage === 'type'
@@ -196,7 +199,12 @@ class Query extends Component {
                           )
 
                           return (
-                            <div key={id}>
+                            <div
+                              css={css`
+                                ${tw(['mb-q16'])};
+                              `}
+                              key={id}
+                            >
                               <input
                                 defaultChecked={tag === historytitle}
                                 css={css`
@@ -227,6 +235,7 @@ class Query extends Component {
                           size="lg"
                           type="button"
                           disabled={!tag}
+                          data-disabled={!tag}
                         >
                           Продолжить
                         </Button>

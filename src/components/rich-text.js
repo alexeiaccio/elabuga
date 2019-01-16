@@ -32,23 +32,23 @@ export const RichText = css`
   ${Body};
   & h2 {
     ${Heading2};
-    ${tw(['mt-q48', 'mb-q24'])};
+    ${tw(['mb-q24'])};
   }
   & h3 {
     ${Heading3};
-    ${tw(['mt-q36', 'mb-q24'])};
+    ${tw(['mb-q24'])};
   }
   & h4 {
     ${Heading4};
-    ${tw(['mt-q32', 'mb-q20'])};
+    ${tw(['mb-q20'])};
   }
   & h5 {
     ${Heading5};
-    ${tw(['mt-q24', 'mb-q16'])};
+    ${tw(['mb-q16'])};
   }
   & h6 {
     ${Heading6};
-    ${tw(['mt-q20', 'mb-q12'])};
+    ${tw(['mb-q12'])};
   }
   & p {
     ${tw(['leading-normal', 'mb-q16', 'md:mb-q24'])};
@@ -86,6 +86,14 @@ export const RichText = css`
   }
   & a {
     ${tw(['text-teal'])};
+  }
+  & .block-img {
+    ${tw(['inline-block', 'mr-q12'])};
+    width: calc(1 / 3 * 100% - 1.5rem);
+  }
+  & img {
+    ${tw(['w-full'])};
+    object-fit: cover;
   }
 `
 

@@ -1,23 +1,40 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 import propPathOr from 'crocks/helpers/propPathOr'
 import posed from 'react-pose'
+import uuid from 'node-uuid'
 
 import Accordion from '../components/accordion'
 import Form from '../components/form'
 import Layout from '../components/layout'
 import Query, { Label } from '../components/query'
 import Seo from '../components/seo'
+import Slider from '../components/slider'
 import RichContent from '../components/rich-content'
 import { Heading1, Heading4 } from '../components/typography'
 import { RichText } from '../components/rich-text'
 
+const cardStyles = css`
+  ${tw(['bg-white', 'my-q48', 'px-q24', 'py-q36', 'shadow-text'])};
+`
+
+const historyStyles = css`
+  ${tw(['bg-white', 'my-q16', 'p-q24', 'shadow-text'])};
+`
+
 const Content = posed.div({
-  closed: { height: 0 },
-  open: { height: 'auto' },
+  closed: {
+    applyAtEnd: { display: 'none' },
+    height: 0,
+  },
+  open: {
+    applyAtStart: { display: 'block' },
+    height: 'auto',
+  },
 })
+
 class IndexPage extends Component {
   constructor(props) {
     super(props)
@@ -26,8 +43,76 @@ class IndexPage extends Component {
     }
   }
 
-  render() {
+  renderHistories = body => {
     const { tag } = this.state
+    const success = propPathOr(
+      null,
+      ['data', 'homepage', 'data', 'success', 'html'],
+      this.props
+    )
+
+    return (
+      <>
+        <div css={historyStyles}>
+          <h2 css={Heading4}>1. Выберите тип вашей истории</h2>
+        </div>
+        {body.map(({ id, items, primary }) => {
+          const historytitle = propPathOr(
+            null,
+            ['historytitle', 'text'],
+            primary
+          )
+
+          return (
+            <div css={historyStyles} key={uuid()}>
+              <input
+                defaultChecked={tag === historytitle}
+                css={css`
+                  ${tw(['hidden'])};
+                `}
+                id={id}
+                name="history-tag"
+                type="radio"
+                value={historytitle}
+              />
+              <Label
+                onClick={() => this.setState({ tag: historytitle })}
+                checked={tag === historytitle}
+              >
+                {historytitle}
+              </Label>
+              <Accordion data={items} />
+            </div>
+          )
+        })}
+        <Content
+          css={css`
+            ${tw(['overflow-hidden'])};
+          `}
+          pose={tag ? 'open' : 'closed'}
+        >
+          <div
+            css={css`
+              ${cardStyles};
+              ${tw(['my-0'])};
+            `}
+          >
+            <h2
+              css={css`
+                ${Heading4};
+                ${tw(['mb-q36'])};
+              `}
+            >
+              2. Заполните форму
+            </h2>
+            <Form tag={tag} success={success} />
+          </div>
+        </Content>
+      </>
+    )
+  }
+
+  render() {
     const { data, location } = this.props
     const pageData = propPathOr(null, ['homepage', 'data'], data)
     const pageTitle = propPathOr(null, ['title', 'text'], pageData)
@@ -43,10 +128,11 @@ class IndexPage extends Component {
     const date = propPathOr(null, ['date'], pageData)
     const fromNow = propPathOr(null, ['fromNow'], pageData)
     const image = propPathOr(null, ['image'], pageData)
-    const text = propPathOr(null, ['text', 'html'], pageData)
-    const info = propPathOr(null, ['info', 'html'], pageData)
     const success = propPathOr(null, ['success', 'html'], pageData)
     const body = propPathOr(null, ['body'], pageData)
+    const historyBody = body.filter(
+      ({ __typename }) => __typename === 'PrismicHomepageBodyHisory'
+    )
 
     return (
       <Layout image={image}>
@@ -57,85 +143,51 @@ class IndexPage extends Component {
           pageImage={pageImage}
           pathname={pathname}
         />
-        <RichContent
-          content={title}
-          css={css`
-            h1 {
-              ${Heading1};
-            }
-          `}
-        />
-        <div
-          css={css`
-            ${tw(['font-semibold', 'mt-q12', 'text-lg'])}
-          `}
-        >
-          {description}
+        <div css={cardStyles}>
+          <RichContent
+            content={title}
+            css={css`
+              h1 {
+                ${Heading1};
+              }
+            `}
+          />
+          <div
+            css={css`
+              ${tw(['font-semibold', 'mt-q12', 'text-lg'])}
+            `}
+          >
+            {description}
+          </div>
+          <Query body={historyBody} success={success} />
+          <div>
+            Cбор историй завершится <b>{fromNow}</b> – {date}
+          </div>
         </div>
-        <Query body={body} success={success} />
         <div>
-          Cбор историй завершится <b>{fromNow}</b> – {date}
-        </div>
-        <RichContent css={RichText} content={text} />
-        <h2
-          css={css`
-            ${Heading4};
-            ${tw(['mb-q24', 'mt-q48'])};
-          `}
-        >
-          1. Выберите тип вашей истории
-        </h2>
-        <div>
-          {body.map(({ id, primary, items }) => {
-            const historytitle = propPathOr(
-              null,
-              ['historytitle', 'text'],
-              primary
-            )
+          {body.map(({ __typename, primary, items }, idx) => {
+            const text = propPathOr(null, ['text', 'html'], primary)
 
             return (
-              <div key={id}>
-                <input
-                  defaultChecked={tag === historytitle}
-                  css={css`
-                    ${tw(['hidden'])};
-                    &:checked ~ label::before {
-                      background-color: #f0c41b;
-                    }
-                  `}
-                  id={id}
-                  name="history-tag"
-                  type="radio"
-                  value={historytitle}
-                />
-                <Label
-                  onClick={() => this.setState({ tag: historytitle })}
-                  checked={tag === historytitle}
-                >
-                  {historytitle}
-                </Label>
-                <Accordion data={items} />
-              </div>
+              <Fragment key={uuid()}>
+                {__typename === 'PrismicHomepageBodyText' && (
+                  <div css={cardStyles} key={uuid()}>
+                    <RichContent css={RichText} content={text} />
+                  </div>
+                )}
+                {__typename === 'PrismicHomepageBodyHisory' &&
+                  propPathOr(null, [idx - 1, '__typename'], body) !==
+                    'PrismicHomepageBodyHisory' &&
+                  this.renderHistories(historyBody)}
+                {__typename === 'PrismicHomepageBodyImageGallery' && (
+                  <div css={cardStyles} key={uuid()}>
+                    <Slider items={items} />
+                  </div>
+                )}
+              </Fragment>
             )
           })}
         </div>
-        <Content
-          css={css`
-            ${tw(['overflow-hidden'])};
-          `}
-          pose={tag ? 'open' : 'closed'}
-        >
-          <h2
-            css={css`
-              ${Heading4};
-              ${tw(['mb-q24', 'mt-q48'])};
-            `}
-          >
-            2. Заполните форму
-          </h2>
-          <Form tag={tag} success={success} />
-        </Content>
-        <RichContent css={RichText} content={info} />
       </Layout>
     )
   }
@@ -183,52 +235,46 @@ export const PageQuery = graphql`
             }
           }
         }
-        text {
-          html
-        }
-        info {
-          html
-        }
         success {
           html
         }
         body {
-          id
-          primary {
-            historytitle {
-              text
-            }
-            historydescription
-            historyimage {
-              url
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 1920) {
-                    ...GatsbyImageSharpFluid_noBase64
-                  }
-                }
+          __typename
+          ... on PrismicHomepageBodyText {
+            primary {
+              text {
+                html
               }
-            }
-            historytext {
-              html
             }
           }
-          items {
-            sampletitle {
-              text
+          ... on PrismicHomepageBodyHisory {
+            id
+            primary {
+              historytitle {
+                text
+              }
             }
-            sampleimage {
-              url
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 1920) {
-                    ...GatsbyImageSharpFluid_noBase64
+            items {
+              sampletitle {
+                text
+              }
+              sampletext {
+                html
+              }
+            }
+          }
+          ... on PrismicHomepageBodyImageGallery {
+            items {
+              images {
+                url
+                localFile {
+                  childImageSharp {
+                    fluid(maxWidth: 1920) {
+                      ...GatsbyImageSharpFluid_noBase64
+                    }
                   }
                 }
               }
-            }
-            sampletext {
-              html
             }
           }
         }
