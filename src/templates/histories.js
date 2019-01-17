@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import { css } from '@emotion/core'
 import propPathOr from 'crocks/helpers/propPathOr'
 import uuid from 'node-uuid'
 
+import Button from '../components/button'
 import Layout from '../components/layout'
+import Pagination from '../components/pagination'
 import Seo from '../components/seo'
 import RichContent from '../components/rich-content'
 import { Heading1, Heading6 } from '../components/typography'
@@ -13,6 +15,12 @@ import { Heading1, Heading6 } from '../components/typography'
 const cardStyles = css`
   ${tw(['bg-white', 'my-q48', 'px-q24', 'py-q36', 'shadow-text'])};
 `
+
+const smCardStyles = css`
+  ${tw(['bg-white', 'my-q24', 'p-q24', 'shadow-text'])};
+`
+
+const LinkButton = Button.withComponent(Link)
 
 function HistoriesPage({ data, location, pageContext }) {
   const seoData = propPathOr(null, ['seo', 'data'], data)
@@ -30,7 +38,7 @@ function HistoriesPage({ data, location, pageContext }) {
   const histories = propPathOr(null, ['histories', 'edges'], data)
 
   const { total } = pageContext
-  const serialize = x => (x % 100 === 1 ? 'я' : x % 100 < 5 ? 'и' : 'й') // eslint-disable-line no-nested-ternary
+  const pluralize = x => (x % 100 === 1 ? 'ю' : x % 100 < 5 ? 'и' : 'й') // eslint-disable-line no-nested-ternary
 
   return (
     <Layout image={image}>
@@ -58,10 +66,13 @@ function HistoriesPage({ data, location, pageContext }) {
           {description}
         </div>
       </div>
-      <div css={cardStyles}>
+      <div css={smCardStyles}>
         <h2 css={Heading6}>
-          Мы уже собрали {total} истори{serialize(total)}
+          Мы уже собрали {total} истори{pluralize(total)}
         </h2>
+      </div>
+      <div css={smCardStyles}>
+        <Pagination data={pageContext} />
       </div>
       {histories.map(({ node }) => {
         const history = propPathOr(null, ['history'], node)
@@ -70,16 +81,59 @@ function HistoriesPage({ data, location, pageContext }) {
         const redacted = propPathOr(null, ['redacted'], node)
 
         return (
-          <div css={cardStyles} key={uuid()}>
+          <div css={smCardStyles} key={uuid()}>
             <div>{history}</div>
-            <div>
-              <span>{name}</span>
-              <span>{date}</span>
-              {redacted && <span>✎</span>}
+            <div
+              css={css`
+                ${tw(['mt-q16', 'text-sm'])};
+                color: #f0c41b;
+              `}
+            >
+              <span
+                css={css`
+                  ${tw(['mr-q24'])};
+                `}
+              >
+                {name}
+              </span>
+              <span>
+                {new Date(date).toLocaleDateString('ru-RU', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </span>
+              {redacted && (
+                <span
+                  css={css`
+                    ${tw(['ml-q8'])};
+                  `}
+                >
+                  ✎
+                </span>
+              )}
             </div>
           </div>
         )
       })}
+      <div css={smCardStyles}>
+        <Pagination data={pageContext} />
+      </div>
+      <div
+        css={css`
+          ${tw(['my-q48', 'text-center'])};
+        `}
+      >
+        <LinkButton
+          css={css`
+            ${tw(['inline-block', 'no-underline', 'text-black'])};
+          `}
+          size="lg"
+          to="/"
+        >
+          На главную
+        </LinkButton>
+      </div>
     </Layout>
   )
 }

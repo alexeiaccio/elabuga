@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import { css } from '@emotion/core'
 import propPathOr from 'crocks/helpers/propPathOr'
 import posed from 'react-pose'
 import uuid from 'node-uuid'
 
 import Accordion from '../components/accordion'
+import Button from '../components/button'
 import Form from '../components/form'
 import Layout from '../components/layout'
 import Query, { Label } from '../components/query'
@@ -34,6 +35,8 @@ const Content = posed.div({
     height: 'auto',
   },
 })
+
+const LinkButton = Button.withComponent(Link)
 
 class IndexPage extends Component {
   constructor(props) {
@@ -187,6 +190,21 @@ class IndexPage extends Component {
               </Fragment>
             )
           })}
+        </div>
+        <div
+          css={css`
+            ${tw(['my-q48', 'text-center'])};
+          `}
+        >
+          <LinkButton
+            css={css`
+              ${tw(['inline-block', 'no-underline', 'text-black'])};
+            `}
+            size="lg"
+            to="/histories"
+          >
+            Все истории
+          </LinkButton>
         </div>
       </Layout>
     )
