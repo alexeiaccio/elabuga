@@ -17,11 +17,11 @@ import { Heading1, Heading4 } from '../components/typography'
 import { RichText } from '../components/rich-text'
 
 const cardStyles = css`
-  ${tw(['bg-white', 'my-q48', 'px-q24', 'py-q36', 'shadow-text'])};
+  ${tw(['py-q24'])};
 `
 
 const historyStyles = css`
-  ${tw(['bg-white', 'my-q16', 'p-q24', 'shadow-text'])};
+  ${tw(['py-q8'])};
 `
 
 const Content = posed.div({
