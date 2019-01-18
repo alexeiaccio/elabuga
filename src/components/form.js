@@ -218,6 +218,9 @@ class Form extends Component {
               css={css`
                 ${tw(['absolute', 'overflow-hidden', 'pin-l', 'w-full'])};
                 top: -0.5rem;
+                & p {
+                  ${tw(['mb-0'])};
+                }
               `}
               key="success"
             >

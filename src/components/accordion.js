@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import posed from 'react-pose'
+import posed, { PoseGroup } from 'react-pose'
 import uuid from 'node-uuid'
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
@@ -51,11 +51,15 @@ const H3 = styled.h3`
 `
 
 const Content = posed.div({
-  closed: { height: 0 },
-  open: { height: 'auto' },
+  exit: { height: 0, delay: 400 },
+  enter: { height: 'auto' },
 })
 
-class Accordion extends React.Component {
+const StyledContent = styled(Content)`
+  ${tw(['bg-yellow-lighter', 'overflow-hidden'])};
+`
+
+class Accordion extends PureComponent {
   state = { open: false }
 
   render() {
@@ -72,20 +76,18 @@ class Accordion extends React.Component {
             >
               {sampletitle.text}
             </H3>
-            <Content
-              css={css`
-                ${tw(['bg-yellow-lighter', 'overflow-hidden'])};
-              `}
-              key={uuid()}
-              pose={open === i ? 'open' : 'closed'}
-            >
-              <RichContent
-                css={css`
-                  ${tw(['px-q24'])};
-                `}
-                content={sampletext.html}
-              />
-            </Content>
+            <PoseGroup animateOnMount>
+              {open === i && [
+                <StyledContent key={uuid()}>
+                  <RichContent
+                    css={css`
+                      ${tw(['px-q24'])};
+                    `}
+                    content={sampletext.html}
+                  />
+                </StyledContent>,
+              ]}
+            </PoseGroup>
           </Fragment>
         ))}
       </>
