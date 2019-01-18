@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx } from '@emotion/core'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import GatsbyImg from 'gatsby-image'
 
@@ -29,4 +28,4 @@ Img.defaultProps = {
   src: null,
 }
 
-export default Img
+export default memo(Img)
