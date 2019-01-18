@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { Helmet } from 'react-helmet'
 import propPathOr from 'crocks/helpers/propPathOr'
@@ -15,9 +16,6 @@ const slideStyles = css`
     'pin-l',
     'pin-t',
   ])};
-  & .slide-image {
-    ${tw(['flex-no-shrink'])};
-  }
 `
 
 const Slide = posed.div({
@@ -26,7 +24,7 @@ const Slide = posed.div({
   },
 })
 
-const Images = memo(({ current, items }) => {
+const Images = ({ current, items }) => {
   const getSrc = images =>
     propPathOr(
       propPathOr(null, ['url'], images),
@@ -45,9 +43,6 @@ const Images = memo(({ current, items }) => {
         css={css`
           ${slideStyles};
           width: ${items.length * 100}%;
-          & .slide-image {
-            width: ${100 / items.length}%;
-          }
         `}
         pose="transform"
         poseKey={current}
@@ -55,16 +50,24 @@ const Images = memo(({ current, items }) => {
         length={items.length}
       >
         {items.map(({ images }) => (
-          <img
-            alt=""
+          <div
             key={uuid()}
-            src={getSrc(images)}
-            className="slide-image"
+            css={css`
+              ${tw(['bg-contain', 'bg-no-repeat', 'flex-no-shrink', 'h-full'])};
+              background-image: url(${getSrc(images)});
+              width: ${100 / items.length}%;
+            `}
+            Ï
           />
         ))}
       </Slide>
     </>
   )
-})
+}
 
-export default Images
+Images.propTypes = {
+  current: PropTypes.number.isRequired,
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+}
+
+export default memo(Images)

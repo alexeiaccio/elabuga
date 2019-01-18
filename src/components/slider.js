@@ -71,13 +71,14 @@ class Slider extends PureComponent {
     return (
       <>
         <div css={sliderStyles}>
-          <Images current={current} items={items} />
           <Draggable
             css={wrapperStyles}
             onDragEnd={this.handleDragEnd}
             onDragStart={this.handleDragStart}
             values={valuesMap}
-          />
+          >
+            <Images current={current} items={items} />
+          </Draggable>
         </div>
         <Bullets active={current} length={items.length} onClick={this.to} />
       </>
