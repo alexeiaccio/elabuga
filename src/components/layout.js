@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Global, css } from '@emotion/core'
+import propPathOr from 'crocks/helpers/propPathOr'
+import { StaticQuery, graphql } from 'gatsby'
 
 import Img from './img'
 
@@ -31,6 +33,7 @@ function Layout({ children, image }) {
       />
       <Img
         backgroundColor="#abacad"
+        fadeIn
         src={image}
         style={{
           position: 'fixed',
@@ -70,4 +73,31 @@ Layout.propTypes = {
   image: PropTypes.objectOf(PropTypes.any).isRequired,
 }
 
-export default Layout
+const WithStaticQuery = props => (
+  <StaticQuery
+    query={graphql`
+      query LayoutQuery {
+        homepage: prismicHomepage {
+          data {
+            image {
+              url
+              localFile {
+                childImageSharp {
+                  fluid(maxWidth: 1920, quality: 80, jpegProgressive: true) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `}
+    render={({ homepage }) => {
+      const image = propPathOr(null, ['data', 'image'], homepage)
+      return <Layout image={image} {...props} />
+    }}
+  />
+)
+
+export default WithStaticQuery

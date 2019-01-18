@@ -127,7 +127,6 @@ class IndexPage extends Component {
     const description = propPathOr(null, ['description'], pageData)
     const date = propPathOr(null, ['date'], pageData)
     const fromNow = propPathOr(null, ['fromNow'], pageData)
-    const image = propPathOr(null, ['image'], pageData)
     const success = propPathOr(null, ['success', 'html'], pageData)
     const body = propPathOr(null, ['body'], pageData)
     const historyBody = body.filter(
@@ -135,7 +134,7 @@ class IndexPage extends Component {
     )
 
     return (
-      <Layout image={image}>
+      <Layout>
         <Seo
           pageTitle={pageTitle}
           pageDescription={description}
@@ -216,14 +215,6 @@ export const PageQuery = graphql`
         date(formatString: "DD MMMM YYYY", locale: "ru")
         fromNow: date(fromNow: true, locale: "ru")
         image {
-          url
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 1920) {
-                ...GatsbyImageSharpFluid_noBase64
-              }
-            }
-          }
           fb {
             url
             localFile {
