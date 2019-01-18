@@ -105,7 +105,7 @@ class Form extends Component {
 
     this.setState(({ contact, msg, left, name }) => ({
       [id]: value,
-      disabled: !(name.length > 1 && contact.length > 5 && msg.length > 20),
+      disabled: name.length < 3 || contact.length < 6 || msg.length < 20,
       error: null,
       left: id === 'msg' ? 700 - value.length : left,
     }))
