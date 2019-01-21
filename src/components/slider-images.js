@@ -57,7 +57,6 @@ const Images = ({ current, items }) => {
               background-image: url(${getSrc(images)});
               width: ${100 / items.length}%;
             `}
-            Ï
           />
         ))}
       </Slide>

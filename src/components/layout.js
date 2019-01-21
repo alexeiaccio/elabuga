@@ -1,17 +1,44 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Global, css } from '@emotion/core'
 import propPathOr from 'crocks/helpers/propPathOr'
 import { StaticQuery, graphql } from 'gatsby'
 
 import Img from './img'
+import Seo from './seo'
+import RichContent from './rich-content'
+import { Heading1 } from './typography'
 
 import '../fonts/open-sans/stylesheet.css'
 import '../fonts/plex/stylesheet.css'
 
-function Layout({ children, image }) {
+const cardStyles = css`
+  ${tw(['py-q24'])};
+`
+
+function Layout({ children, data, location }) {
+  const pageData = propPathOr(null, ['homepage', 'data'], data)
+  const pageTitle = propPathOr(null, ['title', 'text'], pageData)
+  const pageKeywords = propPathOr(null, ['seokeywords'], pageData)
+  const pageImage = propPathOr(
+    propPathOr(null, ['image', 'fb', 'url'], pageData),
+    ['image', 'fb', 'localFile', 'childImageSharp', 'fixed', 'src'],
+    pageData
+  )
+  const pathname = propPathOr('/', ['location', 'pathname'], location)
+  const title = propPathOr(null, ['title', 'html'], pageData)
+  const description = propPathOr(null, ['description'], pageData)
+  const image = propPathOr(null, ['image'], pageData)
+
   return (
     <>
+      <Seo
+        pageTitle={pageTitle}
+        pageDescription={description}
+        pageKeywords={pageKeywords}
+        pageImage={pageImage}
+        pathname={pathname}
+      />
       <Global
         styles={css`
           html {
@@ -62,6 +89,23 @@ function Layout({ children, image }) {
           ])}
         `}
       >
+        <div css={cardStyles}>
+          <RichContent
+            content={title}
+            css={css`
+              h1 {
+                ${Heading1};
+              }
+            `}
+          />
+          <div
+            css={css`
+              ${tw(['font-semibold', 'mt-q12', 'text-lg'])}
+            `}
+          >
+            {description}
+          </div>
+        </div>
         {children}
       </div>
     </>
@@ -70,7 +114,10 @@ function Layout({ children, image }) {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  image: PropTypes.objectOf(PropTypes.any).isRequired,
+  data: PropTypes.objectOf(PropTypes.object).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }).isRequired,
 }
 
 const WithStaticQuery = props => (
@@ -79,6 +126,24 @@ const WithStaticQuery = props => (
       query LayoutQuery {
         homepage: prismicHomepage {
           data {
+            title {
+              html
+              text
+            }
+            description
+            seokeywords
+            image {
+              fb {
+                url
+                localFile {
+                  childImageSharp {
+                    fixed(width: 1200, height: 628) {
+                      src
+                    }
+                  }
+                }
+              }
+            }
             image {
               url
               localFile {
@@ -93,11 +158,8 @@ const WithStaticQuery = props => (
         }
       }
     `}
-    render={({ homepage }) => {
-      const image = propPathOr(null, ['data', 'image'], homepage)
-      return <Layout image={image} {...props} />
-    }}
+    render={data => <Layout data={data} {...props} />}
   />
 )
 
-export default WithStaticQuery
+export default memo(WithStaticQuery)

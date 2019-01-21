@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import posed from 'react-pose'
 import { spring, value } from 'popmotion'
+import propPathOr from 'crocks/helpers/propPathOr'
 
 import Bullets from './bullets'
 import Images from './slider-images'
@@ -21,7 +22,7 @@ const Draggable = posed.div({
   draggable: 'x',
   dragEnd: {
     transition: ({ from, to, velocity }) =>
-      spring({ from, to, velocity, stiffness: 750, damping: 50 }),
+      spring({ from, to, velocity, stiffness: 250, damping: 50 }),
   },
 })
 
@@ -40,18 +41,18 @@ class Slider extends PureComponent {
   }
 
   handleDragStart = e => {
-    const { clientX } = e
+    const { clientX } = propPathOr(e, ['touches', 0], e)
     this.setState({ clientX })
   }
 
   handleDragEnd = e => {
     const { items } = this.props
     const { clientX: oldClientX, current } = this.state
-    const { clientX: newClientX } = e
+    const { clientX: newClientX } = propPathOr(e, ['changedTouches', 0], e)
 
-    if (current + 1 < items.length && newClientX - oldClientX < -50) {
+    if (current + 1 < items.length && newClientX - oldClientX < -30) {
       this.setState({ current: current + 1 })
-    } else if (current > 0 && newClientX - oldClientX > 50) {
+    } else if (current > 0 && newClientX - oldClientX > 30) {
       this.setState({ current: current - 1 })
     }
     this.setState({ clientX: null })
@@ -65,14 +66,17 @@ class Slider extends PureComponent {
     const { items } = this.props
     if (!items) return null
 
-    const { current } = this.state
+    const { current, clientX } = this.state
     const valuesMap = { x: this.x }
 
     return (
       <>
         <div css={sliderStyles}>
           <Draggable
-            css={wrapperStyles}
+            css={css`
+              ${wrapperStyles};
+              cursor: ${clientX ? 'grab' : 'grabbing'};
+            `}
             onDragEnd={this.handleDragEnd}
             onDragStart={this.handleDragStart}
             values={valuesMap}

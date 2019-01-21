@@ -135,7 +135,7 @@ class Query extends Component {
       <>
         <Button
           css={css`
-            ${tw(['mb-q24', 'mt-q48'])};
+            ${tw(['mb-q24', 'mt-q24'])};
           `}
           onClick={this.handleClick}
           size="lg"
