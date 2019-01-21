@@ -9,7 +9,7 @@ import Accordion from '../components/accordion'
 import Form from '../components/form'
 import Layout from '../components/layout'
 import Query, { Label } from '../components/query'
-import Slider from '../components/slider'
+import Img from '../components/img'
 import RichContent from '../components/rich-content'
 import { Heading4 } from '../components/typography'
 import { RichText } from '../components/rich-text'
@@ -114,6 +114,7 @@ class IndexPage extends Component {
         <div>
           {body.map(({ __typename, primary, items }, idx) => {
             const text = propPathOr(null, ['text', 'html'], primary)
+            const images = propPathOr(null, [0, 'images'], items)
 
             return (
               <Fragment key={uuid()}>
@@ -128,7 +129,7 @@ class IndexPage extends Component {
                   this.renderHistories(historyBody)}
                 {__typename === 'PrismicHomepageBodyImageGallery' && (
                   <div css={cardStyles} key={uuid()}>
-                    <Slider items={items} />
+                    <Img src={images} />
                   </div>
                 )}
               </Fragment>
