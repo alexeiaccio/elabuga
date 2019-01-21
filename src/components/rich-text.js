@@ -91,6 +91,10 @@ export const RichText = css`
     ${tw(['inline-block', 'mr-q12'])};
     width: calc(1 / 3 * 100% - 1.5rem);
   }
+  & .caption {
+    ${tw(['align-top', 'inline-block', 'mr-q12', 'text-center'])};
+    width: calc(1 / 3 * 100% - 1.5rem);
+  }
   & img {
     ${tw(['w-full'])};
     object-fit: cover;

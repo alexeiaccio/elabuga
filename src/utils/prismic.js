@@ -18,7 +18,7 @@ const htmlSerializer = () => (type, element, content, children) => {
     case Elements.heading5:
       return `<h5>${tp.execute(children.join(''))}</h5>`
     case Elements.heading6:
-      return `<h6>${tp.execute(children.join(''))}</h6>`
+      return `<p class="caption">${tp.execute(children.join(''))}</p>`
     case Elements.paragraph:
       return `<p>${tp.execute(children.join(''))}</p>`
     case Elements.listItem:

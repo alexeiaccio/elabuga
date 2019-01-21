@@ -89,7 +89,7 @@ class Form extends Component {
 
   static defaultProps = {
     success: false,
-    tag: '',
+    tag: null,
   }
 
   constructor(props) {
@@ -102,18 +102,26 @@ class Form extends Component {
 
   handleUpdate = e => {
     const { id, value } = e.target
+    const { tag } = this.props
 
     this.setState(({ contact, msg, left, name }) => ({
       [id]: value,
-      disabled: name.length < 3 || contact.length < 6 || msg.length < 20,
+      disabled: tag || name.length < 3 || contact.length < 6 || msg.length < 20,
       error: null,
       left: id === 'msg' ? 700 - value.length : left,
     }))
   }
 
   handleClick = () => {
+    const { tag } = this.props
     this.setState(({ disabled }) => ({
-      error: disabled ? 'Пожалуйста, заполните все поля формы.' : null,
+      error:
+        // eslint-disable-next-line
+        !tag
+          ? 'Выберите тип истории'
+          : disabled
+          ? 'Пожалуйста, заполните все поля формы.'
+          : null,
     }))
   }
 
