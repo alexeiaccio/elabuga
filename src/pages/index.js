@@ -3,17 +3,15 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 import propPathOr from 'crocks/helpers/propPathOr'
-import posed from 'react-pose'
 import uuid from 'node-uuid'
 
 import Accordion from '../components/accordion'
 import Form from '../components/form'
 import Layout from '../components/layout'
 import Query, { Label } from '../components/query'
-import Seo from '../components/seo'
 import Slider from '../components/slider'
 import RichContent from '../components/rich-content'
-import { Heading1, Heading4 } from '../components/typography'
+import { Heading4 } from '../components/typography'
 import { RichText } from '../components/rich-text'
 
 const cardStyles = css`
@@ -23,17 +21,6 @@ const cardStyles = css`
 const historyStyles = css`
   ${tw(['py-q8'])};
 `
-
-const Content = posed.div({
-  closed: {
-    applyAtEnd: { display: 'none' },
-    height: 0,
-  },
-  open: {
-    applyAtStart: { display: 'block' },
-    height: 'auto',
-  },
-})
 
 class IndexPage extends Component {
   constructor(props) {
@@ -85,29 +72,22 @@ class IndexPage extends Component {
             </div>
           )
         })}
-        <Content
+        <div
           css={css`
-            ${tw(['overflow-hidden'])};
+            ${cardStyles};
+            ${tw(['my-0'])};
           `}
-          pose={tag ? 'open' : 'closed'}
         >
-          <div
+          <h2
             css={css`
-              ${cardStyles};
-              ${tw(['my-0'])};
+              ${Heading4};
+              ${tw(['mb-q36'])};
             `}
           >
-            <h2
-              css={css`
-                ${Heading4};
-                ${tw(['mb-q36'])};
-              `}
-            >
-              2. Заполните форму
-            </h2>
-            <Form tag={tag} success={success} />
-          </div>
-        </Content>
+            2. Заполните форму
+          </h2>
+          <Form tag={tag} success={success} />
+        </div>
       </>
     )
   }
@@ -115,16 +95,6 @@ class IndexPage extends Component {
   render() {
     const { data, location } = this.props
     const pageData = propPathOr(null, ['homepage', 'data'], data)
-    const pageTitle = propPathOr(null, ['title', 'text'], pageData)
-    const pageKeywords = propPathOr(null, ['seokeywords'], pageData)
-    const pageImage = propPathOr(
-      propPathOr(null, ['image', 'fb', 'url'], pageData),
-      ['image', 'fb', 'localFile', 'childImageSharp', 'fixed', 'src'],
-      pageData
-    )
-    const pathname = propPathOr('/', ['location', 'pathname'], location)
-    const title = propPathOr(null, ['title', 'html'], pageData)
-    const description = propPathOr(null, ['description'], pageData)
     const date = propPathOr(null, ['date'], pageData)
     const fromNow = propPathOr(null, ['fromNow'], pageData)
     const success = propPathOr(null, ['success', 'html'], pageData)
@@ -134,30 +104,8 @@ class IndexPage extends Component {
     )
 
     return (
-      <Layout>
-        <Seo
-          pageTitle={pageTitle}
-          pageDescription={description}
-          pageKeywords={pageKeywords}
-          pageImage={pageImage}
-          pathname={pathname}
-        />
+      <Layout location={location}>
         <div css={cardStyles}>
-          <RichContent
-            content={title}
-            css={css`
-              h1 {
-                ${Heading1};
-              }
-            `}
-          />
-          <div
-            css={css`
-              ${tw(['font-semibold', 'mt-q12', 'text-lg'])}
-            `}
-          >
-            {description}
-          </div>
           <Query body={historyBody} success={success} />
           <div>
             Cбор историй завершится <b>{fromNow}</b> – {date}
@@ -207,25 +155,8 @@ export const PageQuery = graphql`
   query IndexQuery {
     homepage: prismicHomepage {
       data {
-        title {
-          html
-          text
-        }
-        description
         date(formatString: "DD MMMM YYYY", locale: "ru")
         fromNow: date(fromNow: true, locale: "ru")
-        image {
-          fb {
-            url
-            localFile {
-              childImageSharp {
-                fixed(width: 1200, height: 628) {
-                  src
-                }
-              }
-            }
-          }
-        }
         success {
           html
         }
