@@ -75,7 +75,7 @@ class Slider extends PureComponent {
           <Draggable
             css={css`
               ${wrapperStyles};
-              cursor: ${clientX ? 'grab' : 'grabbing'};
+              cursor: ${clientX ? 'grabbing' : 'grab'};
             `}
             onDragEnd={this.handleDragEnd}
             onDragStart={this.handleDragStart}
