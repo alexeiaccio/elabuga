@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import React, { memo } from 'react'
+import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 import uuid from 'node-uuid'
@@ -63,4 +63,4 @@ Bullets.propTypes = {
   onClick: PropTypes.func.isRequired,
 }
 
-export default Bullets
+export default memo(Bullets)

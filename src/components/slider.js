@@ -1,21 +1,32 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { Helmet } from 'react-helmet'
+import posed from 'react-pose'
+import { spring, value } from 'popmotion'
 import propPathOr from 'crocks/helpers/propPathOr'
-import uuid from 'node-uuid'
 
-import Img from './img'
 import Bullets from './bullets'
+import Images from './slider-images'
 
-const slideStyles = css`
-  ${tw(['relative'])};
-  & .slide-image {
-    max-height: 66.66666vh;
-  }
+const sliderStyles = css`
+  ${tw(['overflow-hidden', 'relative'])};
+  max-height: 66.66666vh;
+  padding-bottom: 66.66666%;
 `
 
-class Slider extends Component {
+const wrapperStyles = css`
+  ${tw(['absolute', 'pin'])};
+`
+
+const Draggable = posed.div({
+  draggable: 'x',
+  dragEnd: {
+    transition: ({ from, to, velocity }) =>
+      spring({ from, to, velocity, stiffness: 250, damping: 50 }),
+  },
+})
+
+class Slider extends PureComponent {
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
   }
@@ -24,61 +35,54 @@ class Slider extends Component {
     super()
     this.state = {
       current: 0,
+      clientX: null,
     }
+    this.x = value(0)
   }
 
-  next = () => {
+  handleDragStart = e => {
+    const { clientX } = propPathOr(e, ['touches', 0], e)
+    this.setState({ clientX })
+  }
+
+  handleDragEnd = e => {
     const { items } = this.props
-    this.setState(({ current }) => ({
-      current: (current + 1) % items.length,
-    }))
+    const { clientX: oldClientX, current } = this.state
+    const { clientX: newClientX } = propPathOr(e, ['changedTouches', 0], e)
+
+    if (current + 1 < items.length && newClientX - oldClientX < -30) {
+      this.setState({ current: current + 1 })
+    } else if (current > 0 && newClientX - oldClientX > 30) {
+      this.setState({ current: current - 1 })
+    }
+    this.setState({ clientX: null })
   }
 
-  previous = () => {
-    const { items } = this.props
-    this.setState(({ current }) => ({
-      current: (current - 1) % items.length,
-    }))
-  }
-
-  to = value => {
-    this.setState({ current: value })
+  to = number => {
+    this.setState({ current: number })
   }
 
   render() {
     const { items } = this.props
     if (!items) return null
 
-    const { current } = this.state
+    const { current, clientX } = this.state
+    const valuesMap = { x: this.x }
 
     return (
       <>
-        <Helmet>
-          {items.map(({ images }) => {
-            const imgSrc = propPathOr(
-              null,
-              ['localFile', 'childImageSharp', 'fluid', 'src'],
-              images
-            )
-
-            return <link key={uuid} rel="preload" href={imgSrc} as="image" />
-          })}
-        </Helmet>
-        <div
-          css={slideStyles}
-          onClick={items.length > 1 ? this.next : null}
-          onKeyUp={items.length > 1 ? this.next : null}
-        >
-          {items.map(({ images }, idx) =>
-            idx === current ? (
-              <Img
-                className="slide-image"
-                key={uuid()}
-                imgStyle={{ objectFit: 'contain' }}
-                src={images}
-              />
-            ) : null
-          )}
+        <div css={sliderStyles}>
+          <Draggable
+            css={css`
+              ${wrapperStyles};
+              cursor: ${clientX ? 'grabbing' : 'grab'};
+            `}
+            onDragEnd={this.handleDragEnd}
+            onDragStart={this.handleDragStart}
+            values={valuesMap}
+          >
+            <Images current={current} items={items} />
+          </Draggable>
         </div>
         <Bullets active={current} length={items.length} onClick={this.to} />
       </>
