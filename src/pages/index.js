@@ -136,6 +136,21 @@ class IndexPage extends Component {
             )
           })}
         </div>
+        {/* <div
+          css={css`
+            ${tw(['my-q48', 'text-center'])};
+          `}
+        >
+          <LinkButton
+            css={css`
+              ${tw(['inline-block', 'no-underline', 'text-black'])};
+            `}
+            size="lg"
+            to="/histories"
+          >
+            Все истории
+          </LinkButton>
+        </div> */}
       </Layout>
     )
   }
