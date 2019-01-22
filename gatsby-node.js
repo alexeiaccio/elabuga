@@ -16,7 +16,7 @@ exports.createPages = async ({ actions, graphql }) => {
   `)
 
   const histories = pages.data.histories.edges
-  const postsPerPage = 2
+  const postsPerPage = 10
   const numPages = Math.ceil(histories.length / postsPerPage)
 
   Array.from({ length: numPages }).forEach((_, i) => {
