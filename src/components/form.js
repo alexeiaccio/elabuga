@@ -106,7 +106,8 @@ class Form extends Component {
 
     this.setState(({ contact, msg, left, name }) => ({
       [id]: value,
-      disabled: tag || name.length < 3 || contact.length < 6 || msg.length < 20,
+      disabled:
+        !tag || name.length < 3 || contact.length < 6 || msg.length < 20,
       error: null,
       left: id === 'msg' ? 700 - value.length : left,
     }))
@@ -195,6 +196,7 @@ class Form extends Component {
               id="msg"
               onChange={this.handleUpdate}
               maxLength="720"
+              minLength="20"
               minRows={3}
               placeholder="История длиной до 700 знаков"
               value={msg}
