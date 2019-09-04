@@ -9,7 +9,7 @@ import RichContent from './rich-content'
 import { RichText } from './rich-text'
 
 const wrapperStyles = css`
-  ${tw(['block', 'relative'])};
+  ${tw(['block', 'relative', 'bg-white'])};
 `
 
 const labelStyles = css`

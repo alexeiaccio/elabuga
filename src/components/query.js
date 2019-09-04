@@ -187,7 +187,7 @@ class Query extends Component {
                   ? '1. Выберите тип вашей истории'
                   : '2. Заполните форму'}
               </h2>
-              <PoseGroup>
+              <React.Fragment>
                 {stage === 'type'
                   ? [
                       <Tab key="type">
@@ -262,7 +262,7 @@ class Query extends Component {
                         </div>
                       </Tab>,
                     ]}
-              </PoseGroup>
+              </React.Fragment>
             </Modal>,
           ]}
         </PoseGroup>
