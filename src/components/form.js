@@ -183,7 +183,7 @@ class Form extends Component {
               css={inputStyles}
               id="contact"
               onChange={this.handleUpdate}
-              placeholder="Напишите ваше емеил или телефонный номер"
+              placeholder="Оставьте ваш e-mail или мобильный телефон"
               type={contact.search(/[a-zA-Z@]/) >= 0 ? 'email' : 'tel'}
               value={contact}
               required
@@ -195,10 +195,10 @@ class Form extends Component {
               css={inputStyles}
               id="msg"
               onChange={this.handleUpdate}
-              maxLength="720"
+              maxLength="1000"
               minLength="20"
               minRows={3}
-              placeholder="История длиной до 700 знаков"
+              placeholder="История длиной до 1000 знаков"
               value={msg}
               required
             />
