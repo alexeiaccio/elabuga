@@ -78,7 +78,7 @@ const DEFAULT_STATE = {
   error: null,
   msg: '',
   name: '',
-  left: 700,
+  left: 1000,
 }
 
 class Form extends Component {
