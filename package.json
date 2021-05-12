@@ -82,7 +82,7 @@
     "eslint-plugin-react": "^7.11.1",
     "husky": "^1.2.1",
     "lint-staged": "^7.3.0",
-    "postcss": "^7.0.5",
+    "postcss": "^8.2.10",
     "postcss-cli": "^6.0.0",
     "prettier": "^1.15.3",
     "rimraf": "^2.6.2"
